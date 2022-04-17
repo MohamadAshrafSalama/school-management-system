@@ -87,3 +87,48 @@ class Teacher:
         conn.execute("DELETE FROM teachers WHERE id = ?", (teacher_id,))
         conn.commit()
         conn.close()
+
+
+class Course:
+    @staticmethod
+    def create(code, name, teacher_id=None, max_students=30):
+        conn = get_connection()
+        cursor = conn.execute(
+            "INSERT INTO courses (code, name, teacher_id, max_students) VALUES (?, ?, ?, ?)",
+            (code, name, teacher_id, max_students)
+        )
+        conn.commit()
+        course_id = cursor.lastrowid
+        conn.close()
+        return course_id
+
+    @staticmethod
+    def get_all():
+        conn = get_connection()
+        rows = conn.execute(
+            """SELECT c.*, t.first_name || ' ' || t.last_name as teacher_name
+               FROM courses c LEFT JOIN teachers t ON c.teacher_id = t.id"""
+        ).fetchall()
+        conn.close()
+        return [dict(r) for r in rows]
+
+    @staticmethod
+    def get_by_id(course_id):
+        conn = get_connection()
+        row = conn.execute("SELECT * FROM courses WHERE id = ?", (course_id,)).fetchone()
+        conn.close()
+        return dict(row) if row else None
+
+    @staticmethod
+    def get_by_teacher(teacher_id):
+        conn = get_connection()
+        rows = conn.execute("SELECT * FROM courses WHERE teacher_id = ?", (teacher_id,)).fetchall()
+        conn.close()
+        return [dict(r) for r in rows]
+
+    @staticmethod
+    def delete(course_id):
+        conn = get_connection()
+        conn.execute("DELETE FROM courses WHERE id = ?", (course_id,))
+        conn.commit()
+        conn.close()
