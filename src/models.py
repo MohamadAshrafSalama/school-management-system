@@ -132,3 +132,106 @@ class Course:
         conn.execute("DELETE FROM courses WHERE id = ?", (course_id,))
         conn.commit()
         conn.close()
+
+
+class Assignment:
+    @staticmethod
+    def create(course_id, title, description=None, due_date=None, max_marks=100):
+        conn = get_connection()
+        cursor = conn.execute(
+            "INSERT INTO assignments (course_id, title, description, due_date, max_marks) VALUES (?, ?, ?, ?, ?)",
+            (course_id, title, description, due_date, max_marks)
+        )
+        conn.commit()
+        aid = cursor.lastrowid
+        conn.close()
+        return aid
+
+    @staticmethod
+    def get_by_course(course_id):
+        conn = get_connection()
+        rows = conn.execute("SELECT * FROM assignments WHERE course_id = ?", (course_id,)).fetchall()
+        conn.close()
+        return [dict(r) for r in rows]
+
+    @staticmethod
+    def get_by_id(assignment_id):
+        conn = get_connection()
+        row = conn.execute("SELECT * FROM assignments WHERE id = ?", (assignment_id,)).fetchone()
+        conn.close()
+        return dict(row) if row else None
+
+
+class Enrollment:
+    @staticmethod
+    def enroll(student_id, course_id):
+        conn = get_connection()
+        try:
+            conn.execute(
+                "INSERT INTO enrollments (student_id, course_id) VALUES (?, ?)",
+                (student_id, course_id)
+            )
+            conn.commit()
+        except Exception as e:
+            conn.close()
+            raise e
+        conn.close()
+
+    @staticmethod
+    def get_student_courses(student_id):
+        conn = get_connection()
+        rows = conn.execute(
+            """SELECT c.* FROM courses c
+               JOIN enrollments e ON c.id = e.course_id
+               WHERE e.student_id = ?""", (student_id,)
+        ).fetchall()
+        conn.close()
+        return [dict(r) for r in rows]
+
+    @staticmethod
+    def get_course_students(course_id):
+        conn = get_connection()
+        rows = conn.execute(
+            """SELECT s.* FROM students s
+               JOIN enrollments e ON s.id = e.student_id
+               WHERE e.course_id = ?""", (course_id,)
+        ).fetchall()
+        conn.close()
+        return [dict(r) for r in rows]
+
+
+class Grade:
+    @staticmethod
+    def assign_grade(student_id, assignment_id, marks):
+        conn = get_connection()
+        conn.execute(
+            """INSERT OR REPLACE INTO grades (student_id, assignment_id, marks)
+               VALUES (?, ?, ?)""",
+            (student_id, assignment_id, marks)
+        )
+        conn.commit()
+        conn.close()
+
+    @staticmethod
+    def get_student_grades(student_id):
+        conn = get_connection()
+        rows = conn.execute(
+            """SELECT g.marks, a.title, a.max_marks, c.name as course_name
+               FROM grades g
+               JOIN assignments a ON g.assignment_id = a.id
+               JOIN courses c ON a.course_id = c.id
+               WHERE g.student_id = ?""", (student_id,)
+        ).fetchall()
+        conn.close()
+        return [dict(r) for r in rows]
+
+    @staticmethod
+    def get_assignment_grades(assignment_id):
+        conn = get_connection()
+        rows = conn.execute(
+            """SELECT g.marks, s.first_name, s.last_name
+               FROM grades g JOIN students s ON g.student_id = s.id
+               WHERE g.assignment_id = ?""", (assignment_id,)
+        ).fetchall()
+        conn.close()
+        return [dict(r) for r in rows]
