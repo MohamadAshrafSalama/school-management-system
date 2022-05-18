@@ -235,3 +235,27 @@ class Grade:
         ).fetchall()
         conn.close()
         return [dict(r) for r in rows]
+
+
+class Attendance:
+    @staticmethod
+    def mark(student_id, course_id, date, status):
+        conn = get_connection()
+        conn.execute(
+            "INSERT OR REPLACE INTO attendance (student_id, course_id, date, status) VALUES (?, ?, ?, ?)",
+            (student_id, course_id, date, status)
+        )
+        conn.commit()
+        conn.close()
+
+    @staticmethod
+    def get_by_student(student_id):
+        conn = get_connection()
+        rows = conn.execute(
+            """SELECT a.*, c.name as course_name FROM attendance a
+               JOIN courses c ON a.course_id = c.id
+               WHERE a.student_id = ? ORDER BY a.date DESC""",
+            (student_id,)
+        ).fetchall()
+        conn.close()
+        return [dict(r) for r in rows]
