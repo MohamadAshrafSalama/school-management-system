@@ -5,7 +5,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from src.database import init_db
 from src.auth import login, create_default_admin, create_user
-from src.models import Student, Teacher, Course, Assignment, Enrollment, Grade
+from src.models import Student, Teacher, Course, Assignment, Enrollment, Grade, Attendance
 from src.reports import get_student_grade_report, get_course_average, get_attendance_summary
 
 
@@ -343,13 +343,12 @@ def view_course_students(teacher):
 
 
 def mark_attendance(teacher):
-    from src.database import get_connection
     courses = Course.get_by_teacher(teacher['id'])
     if not courses:
         print("No courses assigned.")
         return
     for c in courses:
-        print(f"  [{c['id']}] {c['code']}")
+        print(f"  [{c['id']}] {c['code']} - {c['name']}")
 
     try:
         cid = int(input("Course ID: "))
@@ -359,16 +358,10 @@ def mark_attendance(teacher):
             print("No students enrolled.")
             return
 
-        conn = get_connection()
         for s in students:
             status = input(f"  {s['first_name']} {s['last_name']} (present/absent/late): ").strip().lower()
             if status in ('present', 'absent', 'late'):
-                conn.execute(
-                    "INSERT OR REPLACE INTO attendance (student_id, course_id, date, status) VALUES (?, ?, ?, ?)",
-                    (s['id'], cid, date, status)
-                )
-        conn.commit()
-        conn.close()
+                Attendance.mark(s['id'], cid, date, status)
         print("Attendance recorded.")
     except Exception as e:
         print(f"Error: {e}")
