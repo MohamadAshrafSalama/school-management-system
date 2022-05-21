@@ -38,6 +38,21 @@ class Student:
         return [dict(r) for r in rows]
 
     @staticmethod
+    def update(student_id, first_name=None, last_name=None, email=None, phone=None):
+        conn = get_connection()
+        student = conn.execute("SELECT * FROM students WHERE id = ?", (student_id,)).fetchone()
+        if not student:
+            conn.close()
+            raise ValueError("Student not found.")
+        conn.execute(
+            "UPDATE students SET first_name=?, last_name=?, email=?, phone=? WHERE id=?",
+            (first_name or student['first_name'], last_name or student['last_name'],
+             email or student['email'], phone or student['phone'], student_id)
+        )
+        conn.commit()
+        conn.close()
+
+    @staticmethod
     def delete(student_id):
         conn = get_connection()
         conn.execute("DELETE FROM students WHERE id = ?", (student_id,))
