@@ -97,6 +97,21 @@ class Teacher:
         return [dict(r) for r in rows]
 
     @staticmethod
+    def update(teacher_id, first_name=None, last_name=None, email=None, department=None):
+        conn = get_connection()
+        teacher = conn.execute("SELECT * FROM teachers WHERE id = ?", (teacher_id,)).fetchone()
+        if not teacher:
+            conn.close()
+            raise ValueError("Teacher not found.")
+        conn.execute(
+            "UPDATE teachers SET first_name=?, last_name=?, email=?, department=? WHERE id=?",
+            (first_name or teacher['first_name'], last_name or teacher['last_name'],
+             email or teacher['email'], department or teacher['department'], teacher_id)
+        )
+        conn.commit()
+        conn.close()
+
+    @staticmethod
     def delete(teacher_id):
         conn = get_connection()
         conn.execute("DELETE FROM teachers WHERE id = ?", (teacher_id,))
