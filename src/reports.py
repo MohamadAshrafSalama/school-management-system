@@ -65,3 +65,29 @@ def get_attendance_summary(student_id):
     ).fetchall()
     conn.close()
     return [dict(r) for r in rows]
+
+
+def get_course_roster(course_id):
+    from src.database import get_connection
+    conn = get_connection()
+    rows = conn.execute(
+        """SELECT s.id, s.first_name, s.last_name, s.email
+           FROM students s
+           JOIN enrollments e ON s.id = e.student_id
+           WHERE e.course_id = ?
+           ORDER BY s.last_name, s.first_name""", (course_id,)
+    ).fetchall()
+    conn.close()
+    return [dict(r) for r in rows]
+
+
+def get_overall_stats():
+    from src.database import get_connection
+    conn = get_connection()
+    stats = {}
+    stats['total_students'] = conn.execute("SELECT COUNT(*) FROM students").fetchone()[0]
+    stats['total_teachers'] = conn.execute("SELECT COUNT(*) FROM teachers").fetchone()[0]
+    stats['total_courses'] = conn.execute("SELECT COUNT(*) FROM courses").fetchone()[0]
+    stats['total_enrollments'] = conn.execute("SELECT COUNT(*) FROM enrollments").fetchone()[0]
+    conn.close()
+    return stats
