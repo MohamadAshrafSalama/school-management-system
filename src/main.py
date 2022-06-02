@@ -6,7 +6,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from src.database import init_db
 from src.auth import login, create_default_admin, create_user
 from src.models import Student, Teacher, Course, Assignment, Enrollment, Grade, Attendance
-from src.reports import get_student_grade_report, get_course_average, get_attendance_summary
+from src.reports import get_student_grade_report, get_course_average, get_attendance_summary, get_overall_stats
 
 
 def print_header(title):
@@ -55,6 +55,7 @@ def admin_menu(user):
             "View All Students",
             "View All Teachers",
             "View All Courses",
+            "System Statistics",
         ]
         print_menu(options)
         choice = get_choice(len(options))
@@ -72,6 +73,17 @@ def admin_menu(user):
             view_all_teachers()
         elif choice == 6:
             view_all_courses()
+        elif choice == 7:
+            show_stats()
+
+
+def show_stats():
+    stats = get_overall_stats()
+    print_header("System Statistics")
+    print(f"  Total Students:    {stats['total_students']}")
+    print(f"  Total Teachers:    {stats['total_teachers']}")
+    print(f"  Total Courses:     {stats['total_courses']}")
+    print(f"  Total Enrollments: {stats['total_enrollments']}")
 
 
 def register_student():
