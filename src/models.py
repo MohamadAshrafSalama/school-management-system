@@ -157,6 +157,21 @@ class Course:
         return [dict(r) for r in rows]
 
     @staticmethod
+    def update(course_id, name=None, teacher_id=None, max_students=None):
+        conn = get_connection()
+        course = conn.execute("SELECT * FROM courses WHERE id = ?", (course_id,)).fetchone()
+        if not course:
+            conn.close()
+            raise ValueError("Course not found.")
+        conn.execute(
+            "UPDATE courses SET name=?, teacher_id=?, max_students=? WHERE id=?",
+            (name or course['name'], teacher_id if teacher_id is not None else course['teacher_id'],
+             max_students or course['max_students'], course_id)
+        )
+        conn.commit()
+        conn.close()
+
+    @staticmethod
     def delete(course_id):
         conn = get_connection()
         conn.execute("DELETE FROM courses WHERE id = ?", (course_id,))
