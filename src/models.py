@@ -234,6 +234,16 @@ class Enrollment:
         return [dict(r) for r in rows]
 
     @staticmethod
+    def unenroll(student_id, course_id):
+        conn = get_connection()
+        conn.execute(
+            "DELETE FROM enrollments WHERE student_id = ? AND course_id = ?",
+            (student_id, course_id)
+        )
+        conn.commit()
+        conn.close()
+
+    @staticmethod
     def get_course_students(course_id):
         conn = get_connection()
         rows = conn.execute(
