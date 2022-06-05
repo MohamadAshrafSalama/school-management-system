@@ -13,8 +13,15 @@ def get_connection():
 
 
 def init_db():
-    conn = get_connection()
-    with open(SCHEMA_PATH, 'r') as f:
-        conn.executescript(f.read())
-    conn.commit()
-    conn.close()
+    try:
+        conn = get_connection()
+        with open(SCHEMA_PATH, 'r') as f:
+            conn.executescript(f.read())
+        conn.commit()
+        conn.close()
+    except FileNotFoundError:
+        print(f"Error: Schema file not found at {SCHEMA_PATH}")
+        raise
+    except Exception as e:
+        print(f"Database initialization error: {e}")
+        raise
