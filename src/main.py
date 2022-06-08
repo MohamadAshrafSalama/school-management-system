@@ -251,6 +251,7 @@ def teacher_menu(user):
             "Grade Assignment",
             "View Course Students",
             "Mark Attendance",
+            "Change Password",
         ]
         print_menu(options)
         choice = get_choice(len(options))
@@ -266,6 +267,8 @@ def teacher_menu(user):
             view_course_students(teacher)
         elif choice == 5:
             mark_attendance(teacher)
+        elif choice == 6:
+            do_change_password(user)
 
 
 def my_courses(teacher):
