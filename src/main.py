@@ -56,6 +56,7 @@ def admin_menu(user):
             "View All Teachers",
             "View All Courses",
             "System Statistics",
+            "Delete Student",
         ]
         print_menu(options)
         choice = get_choice(len(options))
@@ -75,6 +76,27 @@ def admin_menu(user):
             view_all_courses()
         elif choice == 7:
             show_stats()
+        elif choice == 8:
+            admin_delete_student()
+
+
+def admin_delete_student():
+    students = Student.get_all()
+    if not students:
+        print("No students to delete.")
+        return
+    for s in students:
+        print(f"  [{s['id']}] {s['first_name']} {s['last_name']}")
+    try:
+        sid = int(input("Student ID to delete: "))
+        confirm = input("Are you sure? (y/n): ").strip().lower()
+        if confirm == 'y':
+            Student.delete(sid)
+            print("Student deleted.")
+        else:
+            print("Cancelled.")
+    except Exception as e:
+        print(f"Error: {e}")
 
 
 def show_stats():
