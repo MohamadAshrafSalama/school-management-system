@@ -4,7 +4,7 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from src.database import init_db
-from src.auth import login, create_default_admin, create_user
+from src.auth import login, create_default_admin, create_user, change_password
 from src.models import Student, Teacher, Course, Assignment, Enrollment, Grade, Attendance
 from src.reports import get_student_grade_report, get_course_average, get_attendance_summary, get_overall_stats
 
@@ -393,6 +393,7 @@ def student_menu(user):
             "My Courses",
             "My Grades",
             "My Attendance",
+            "Change Password",
         ]
         print_menu(options)
         choice = get_choice(len(options))
@@ -404,6 +405,8 @@ def student_menu(user):
             student_grades(student)
         elif choice == 3:
             student_attendance(student)
+        elif choice == 4:
+            do_change_password(user)
 
 
 def student_courses(student):
@@ -435,6 +438,20 @@ def student_attendance(student):
     for s in summary:
         rate = round(s['present'] * 100 / s['total'], 1) if s['total'] > 0 else 0
         print(f"  {s['course']}: {s['present']}/{s['total']} present ({rate}%)")
+
+
+def do_change_password(user):
+    old_pw = input("Current password: ").strip()
+    new_pw = input("New password: ").strip()
+    confirm = input("Confirm new password: ").strip()
+    if new_pw != confirm:
+        print("Passwords don't match.")
+        return
+    try:
+        change_password(user['id'], old_pw, new_pw)
+        print("Password changed successfully.")
+    except ValueError as e:
+        print(f"Error: {e}")
 
 
 # ---- Main ----
