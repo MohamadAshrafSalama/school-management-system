@@ -507,4 +507,9 @@ def run():
 
 
 if __name__ == '__main__':
-    run()
+    try:
+        run()
+    except KeyboardInterrupt:
+        print("\n\nExiting. Goodbye!")
+    except Exception as e:
+        print(f"\nUnexpected error: {e}")
