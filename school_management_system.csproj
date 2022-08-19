@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{601D5162-A997-4877-B416-54DA052346F4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>school_management_system</RootNamespace>
+    <AssemblyName>school_management_system</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="assigment_with_marks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="assigment_with_marks.Designer.cs">
+      <DependentUpon>assigment_with_marks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DoAssignment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DoAssignment.Designer.cs">
+      <DependentUpon>DoAssignment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DO_assigment_teacher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DO_assigment_teacher.Designer.cs">
+      <DependentUpon>DO_assigment_teacher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="make_class_mangercontrol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="make_class_mangercontrol.Designer.cs">
+      <DependentUpon>make_class_mangercontrol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="mangerLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mangerLogin.Designer.cs">
+      <DependentUpon>mangerLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="manger_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="manger_form.Designer.cs">
+      <DependentUpon>manger_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewFolder1\Assignmentcs.cs" />
+    <Compile Include="NewFolder1\Class.cs" />
+    <Compile Include="NewFolder1\Class1.cs" />
+    <Compile Include="NewFolder1\Manger.cs" />
+    <Compile Include="NewFolder1\Receptionist.cs" />
+    <Compile Include="NewFolder1\Student.cs" />
+    <Compile Include="NewFolder1\Teatcher.cs" />
+    <Compile Include="NewFolder1\user.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="receptionist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="receptionist.Designer.cs">
+      <DependentUpon>receptionist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RecLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RecLogin.Designer.cs">
+      <DependentUpon>RecLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Show Class.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Show Class.Designer.cs">
+      <DependentUpon>Show Class.cs</DependentUpon>
+    </Compile>
+    <Compile Include="student _check_their_names.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="student _check_their_names.Designer.cs">
+      <DependentUpon>student _check_their_names.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StudentLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StudentLogin.Designer.cs">
+      <DependentUpon>StudentLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StudentRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StudentRegister.Designer.cs">
+      <DependentUpon>StudentRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sudent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sudent.Designer.cs">
+      <DependentUpon>Sudent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="teacher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="teacher.Designer.cs">
+      <DependentUpon>teacher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="teacher_data_for assigment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="teacher_data_for assigment.Designer.cs">
+      <DependentUpon>teacher_data_for assigment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="teacher_info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="teacher_info.Designer.cs">
+      <DependentUpon>teacher_info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="teacher_new_registration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="teacher_new_registration.Designer.cs">
+      <DependentUpon>teacher_new_registration.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="assigment_with_marks.resx">
+      <DependentUpon>assigment_with_marks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DoAssignment.resx">
+      <DependentUpon>DoAssignment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DO_assigment_teacher.resx">
+      <DependentUpon>DO_assigment_teacher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="make_class_mangercontrol.resx">
+      <DependentUpon>make_class_mangercontrol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mangerLogin.resx">
+      <DependentUpon>mangerLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="manger_form.resx">
+      <DependentUpon>manger_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="receptionist.resx">
+      <DependentUpon>receptionist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecLogin.resx">
+      <DependentUpon>RecLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Show Class.resx">
+      <DependentUpon>Show Class.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="student _check_their_names.resx">
+      <DependentUpon>student _check_their_names.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentLogin.resx">
+      <DependentUpon>StudentLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentRegister.resx">
+      <DependentUpon>StudentRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sudent.resx">
+      <DependentUpon>Sudent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="teacher.resx">
+      <DependentUpon>teacher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="teacher_data_for assigment.resx">
+      <DependentUpon>teacher_data_for assigment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="teacher_info.resx">
+      <DependentUpon>teacher_info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="teacher_new_registration.resx">
+      <DependentUpon>teacher_new_registration.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download %2810%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\student-education-logo-vector-14724398.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\71J8FXRnjcL._AC_SL1500_.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download %286%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download %287%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download %285%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download %288%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download %289%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download %2816%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download %283%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download %282%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download %285%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download %2815%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\receptionist-woman-black-concept-icon-vector-23243693.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\259091-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download %281%29.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
